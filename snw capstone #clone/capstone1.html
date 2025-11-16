@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Chatter Art Connect - Home</title>
+<style>
+
+body {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background: #eaf1fa;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: row;
+}
+#sidebar {
+  width: 260px;
+  background: #fff;
+  padding: 20px 14px 0;
+  border-right: 1px solid #dde3ea;
+  height: 100vh;
+  box-sizing: border-box;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+}
+nav ul { list-style: none; padding: 0; margin:0; }
+nav ul li {
+  margin: 17px 0;
+  font-weight: bold;
+  cursor: pointer;
+  padding: 12px 15px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  transition: background 0.19s, color 0.17s;
+}
+nav ul li:hover {background: #f4f8ff;}
+.sidebar-icon {
+  font-size: 1.3em; width: 23px; text-align: center;
+}
+.badge {
+  background: #afc1ff;
+  border-radius: 12px;
+  padding: 2px 8px;
+  font-size: 0.85em;
+  margin-left: 6px;
+  color: #3357A0;
+}
+#main-content {
+  flex-grow: 1;
+  min-width: 480px;
+  max-width: 680px;
+  background: #f9fcff;
+  height: 100vh;
+  overflow-y: auto;
+  box-sizing: border-box;
+  padding: 38px 22px 22px 22px;
+  display: flex;
+  flex-direction: column;
+}
+.story-highlight-card {
+  background: linear-gradient(105deg,#f8fbff 65%,#ebe4f7 120%);
+  border-radius: 23px;
+  box-shadow: 0 2px 15px #4575c016;
+  display: flex; align-items: center; gap: 26px;
+  margin-bottom: 22px;
+  padding: 23px 23px 23px 30px;
+  position: relative;
+  min-height: 93px;
+}
+.story-user-avatars {
+  display: flex; gap: 10px;
+}
+.story-avatar {
+  border-radius: 50%;
+  border: 3px solid #fff;
+  overflow: hidden;
+  width: 53px; height: 53px;
+  box-shadow: 0 1px 8px #abc2f250;
+  background: #eaf3ff;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 2em; color: #888;
+}
+.story-content {
+  flex-grow: 1;
+}
+.story-title {
+  font-weight: bold;
+  font-size: 1.13em;
+  color: #3357A0;
+  margin-bottom: 5px;
+  letter-spacing: 0.4px;
+}
+.story-desc {
+  color: #4b4b71; font-size: 1em;
+}
+.story-btns {
+  display: flex; gap: 10px; margin-top: 7px;
+}
+.story-btn, .add-story-btn {
+  padding: 7px 18px;
+  border-radius: 14px;
+  border: none;
+  font-weight: bold;
+  background: linear-gradient(95deg,#5090f6,#8F60E6);
+  color: #fff;
+  font-size: 1em;
+  cursor: pointer;
+  transition: box-shadow 0.13s, background 0.15s;
+  box-shadow: 0 1.5px 7px #a3b8ff46;
+}
+.story-btn:hover, .add-story-btn:hover {
+  background: linear-gradient(105deg,#4575c0,#8F60E6 93%);
+  box-shadow: 0 4px 17px #7c93ea58;
+}
+.add-story-btn {background: linear-gradient(95deg,#80e6c8 30%,#3ddad0 110%);}
+.add-story-btn:hover {background:linear-gradient(105deg,#20c997,#63e1cd);}
+.art-contest-block {
+  display: flex; flex-direction: column;
+  background: linear-gradient(104deg,#fff7e2 60%,#ffd8ef 170%);
+  border-radius: 23px;
+  box-shadow: 0 2px 15px #ceb5f015;
+  padding: 20px 32px 23px 24px;
+  margin-bottom: 23px;
+  position: relative;
+  border-left: 8px solid #a889e8;
+}
+.art-contest-row {
+  display: flex; justify-content: space-between; align-items: center;
+}
+.art-contest-title {
+  font-size: 1.2em; font-weight: bold; color: #9157e2;
+}
+.art-contest-badge {
+  background: linear-gradient(90deg,#98fae7,#9a98ff);
+  color: #1B365D;
+  font-weight: bold;
+  border-radius: 15px;
+  padding: 6px 16px;
+  font-size: 0.93em;
+  margin-left: 8px;
+}
+.art-contest-desc {
+  font-size: 1.02em; margin-top: 10px; color:#464846;
+  margin-bottom: 13px;
+}
+.contest-btns {
+  display: flex; gap: 13px;
+}
+.contest-btn {
+  border: none; border-radius: 14px;
+  font-size: 1em; font-weight: bold;
+  padding: 8px 27px;
+  background: linear-gradient(93deg,#2ad276 23%,#ada2fd 90%);
+  color: #fff;
+  cursor: pointer;
+  box-shadow: 0 2px 14px #00a36a0e;
+  transition: background 0.15s;
+}
+.contest-btn:hover {
+  background: linear-gradient(98deg,#2ad276 55%,#7e7ae6 110%);
+}
+.contest-leaderboard {
+  font-size: 0.96em; margin-top:7px; color:#6a4df2; font-weight:bold;
+}
+.posts-feed {width: 100%; margin: 12px 0 0 0;}
+.post-card {
+  background: #fff;
+  border-radius: 18px;
+  margin-bottom: 19px;
+  padding: 18px 22px 18px 22px;
+  box-shadow: 0 1px 8px #7c93ea19;
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  transition: box-shadow 0.18s;
+}
+.post-card:hover {box-shadow: 0 7px 28px #b2b2df44;}
+.post-avatar {
+  width: 49px; height: 49px;
+  border-radius: 50%; background: #e6f8f7;
+  display: flex;align-items: center;justify-content: center;
+  font-size: 1.7em; color: #5984eb; flex-shrink: 0;
+  overflow: hidden;
+  border: 2.5px solid #e5eaff;
+  box-shadow: 0 2px 10px #b2def522;
+}
+.post-avatar img {
+  width:100%; height:100%; object-fit:cover; border-radius:50%;
+}
+.post-maincol {flex-grow:1;}
+.post-header-row {
+  display: flex; align-items: center; gap: 13px; margin-bottom: 2px;
+}
+.post-username {font-weight: bold; color: #2851cb;}
+.post-meta {font-size: 0.97em; color: #a8a8aa;}
+.post-text, .post-media {
+  margin-bottom: 7px; color: #34374f;
+}
+.post-media img, .post-media video {
+  width: 100%; max-width: 310px;
+  border-radius: 12px; margin-top:3px; box-shadow:0 2px 13px #bee0f040;
+}
+.reaction-bar {
+  display: flex; gap: 18px; margin-top: 9px; align-items: center;
+}
+.reaction-btn {
+  border: none; background: transparent; font-size: 1.2em; cursor: pointer; padding: 3px 9px; border-radius: 11px;
+  transition: background 0.14s,color 0.13s;
+  color: #9e9e9e;
+  display: flex; align-items: center; gap: 6px;
+}
+.reaction-btn:hover {background: #f1f7fe; color: #4284ff;}
+.post-badge {
+  background: #98fae7;
+  color: #449897;
+  border-radius: 10px; padding:3px 12px; font-size: 0.92em; font-weight: bold;
+  margin-left: 9px;
+}
+.reply-btn {color: #8e8fba;}
+.reply-btn:hover {background: #f6ebff; color:#7a63df;}
+#right-sidebar {
+  width: 320px;
+  background: #fff;
+  padding: 26px 18px 18px 24px;
+  height: 100vh;
+  overflow-y: auto;
+  box-sizing: border-box;
+  flex-shrink: 0;
+  border-left: 1px solid #dde3ea;
+}
+.news-item, .recommendation {
+  padding: 10px 0;
+  border-bottom: 1px solid #eee;
+}
+.sidebar-nav {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.sidebar-nav li {
+  margin: 18px 0;
+}
+.sidebar-link-btn {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  text-decoration: none;
+  color: #2851cb;
+  font-weight: bold;
+  font-size: 1.06em;
+  background: #f4f8ff;
+  border-radius: 18px;
+  padding: 12px 18px;
+  border: none;
+  transition: background 0.17s, color 0.15s, box-shadow 0.18s;
+  box-shadow: 0 1px 6px #afc1ff18;
+  cursor: pointer;
+}
+.sidebar-link-btn:hover,
+.sidebar-link-btn.active {
+  background: linear-gradient(95deg,#5090f6 65%,#8F60E6 130%);
+  color: #fff;
+  box-shadow: 0 4px 20px #6387f23e;
+  text-decoration: none;
+}
+.sidebar-icon {
+  font-size: 1.3em;
+  width: 23px;
+  text-align: center;
+}
+.badge {
+  background: #afc1ff;
+  border-radius: 12px;
+  padding: 2px 8px;
+  font-size: 0.85em;
+  margin-left: 6px;
+  color: #3357A0;
+}
+</style>
+</head>
+<body>
+  <div id="sidebar">
+  <div style="margin-bottom:10px;"><img src="https://cdn.leonardo.ai/users/72f787c0-709d-4382-a718-596433668068/generations/c83312d9-d0ff-4607-9e1f-f013b99751b2/segments/3:4:1/Lucid_Origin_A_modern_Gen_Z_logo_for_Chatter_Art_Connectvibran_2.jpg" alt="Chatter Art Connect Logo" style="width:100%;"/></div>
+  <nav>
+    <ul class="sidebar-nav">
+      <li><a class="sidebar-link-btn active" href="http://127.0.0.1:3000/capstone1.html?serverWindowId=c4f5294b-1a5c-4ca0-8c2b-ad7a4ae33b7c"><span class="sidebar-icon">🏠</span> Home</a></li>
+      <li><a class="sidebar-link-btn" href="http://127.0.0.1:3000/capstone2.html?serverWindowId=c4f5294b-1a5c-4ca0-8c2b-ad7a4ae33b7c"><span class="sidebar-icon">🔍</span> Explore</a></li>
+      <li><a class="sidebar-link-btn" href="http://127.0.0.1:3000/capstone3.html?serverWindowId=c4f5294b-1a5c-4ca0-8c2b-ad7a4ae33b7c"><span class="sidebar-icon">🔔</span> Notifications <span class="badge">3</span></a></li>
+      <li><a class="sidebar-link-btn" href="http://127.0.0.1:3000/capstone4.html?serverWindowId=c4f5294b-1a5c-4ca0-8c2b-ad7a4ae33b7c"><span class="sidebar-icon">💬</span> Messages <span class="badge">2</span></a></li>
+      <li><a class="sidebar-link-btn" href="http://127.0.0.1:3000/capstone5.html?serverWindowId=c4f5294b-1a5c-4ca0-8c2b-ad7a4ae33b7c"><span class="sidebar-icon">🌐</span> Community & Collage</a></li>
+      <li><a class="sidebar-link-btn" href="http://127.0.0.1:3000/capstone6.html?serverWindowId=c4f5294b-1a5c-4ca0-8c2b-ad7a4ae33b7c"><span class="sidebar-icon">👤</span> Profile</a></li>
+      <li><a class="sidebar-link-btn" href="http://127.0.0.1:3000/capstone7.html?serverWindowId=c4f5294b-1a5c-4ca0-8c2b-ad7a4ae33b7c"><span class="sidebar-icon">⚙️</span> Settings</a></li>
+    </ul>
+  </nav>
+</div>
+  <div id="main-content">
+    <!-- Story highlight row -->
+    <div class="story-highlight-card">
+      <div class="story-user-avatars">
+        <span class="story-avatar"><img src="https://i.pinimg.com/736x/3b/89/55/3b8955693006933f1a8b4f9eb26ba2f8.jpg" alt="Priya" style="width: 100%;height:100%;border-radius:50%;object-fit:cover;"></span>
+        <span class="story-avatar"><img src="https://i.pinimg.com/1200x/47/1b/d3/471bd38b7ff5b048ee0d317708cb5abc.jpg" alt="Arjun" style="width: 100%;height:100%;border-radius:50%;object-fit:cover;"></span>
+        <span class="story-avatar" style="background:#ebeef7;color:#8a8aaf;">+5</span>
+      </div>
+      <div class="story-content">
+        <div class="story-title">Story Highlights</div>
+        <div class="story-desc">See what top creators are sharing today or add your own story.</div>
+        <div class="story-btns">
+          <button class="story-btn" onclick="window.location='javascript:void(0)'">View All</button>
+          <button class="add-story-btn" onclick="window.location='javascript:void(0)'">+ Add Story</button>
+        </div>
+      </div>
+    </div>
+    <!-- Art contest block -->
+    <div class="art-contest-block">
+      <div class="art-contest-row">
+        <span class="art-contest-title">Art Contest <span class="art-contest-badge">Dreamscapes • OPEN</span></span>
+        <div class="contest-btns">
+          <button class="contest-btn" onclick="window.location='javascript:void(0)'">Submit Work</button>
+          <button class="contest-btn" onclick="window.location='javascript:void(0)'">View Entries</button>
+        </div>
+      </div>
+      <div class="art-contest-desc">
+        Submit your best dream-inspired art for a chance to be featured and win community rewards!
+      </div>
+      <div class="contest-leaderboard">Leaderboard: <b>Pia_Fernandez</b> 🥇 · <b>JulesA</b> 🥈 · <b>CreativeSoul</b> 🥉</div>
+    </div>
+    <!-- Posts feed -->
+    <div class="posts-feed">
+      <!-- Example Post 1 -->
+      <div class="post-card">
+        <div class="post-avatar"><img src="https://i.pinimg.com/736x/fd/9e/56/fd9e56e212eb81d2f39bc3ed0ce6fba3.jpg" alt="Arjun"></div>
+        <div class="post-maincol">
+          <div class="post-header-row">
+            <span class="post-username">Satoru Gojo</span>
+            <span class="post-meta">· 2m</span>
+          </div>
+          <div class="post-text">Shibuya at nightt 🌌✨</div>
+          <div class="post-media">
+            <img src="https://i.pinimg.com/1200x/3b/5f/c2/3b5fc27d31c247fd3ca0c38a3edc8b41.jpg" alt="Art by Arjun">
+          </div>
+          <div class="reaction-bar">
+            <button class="reaction-btn"><span>👍 24</span></button>
+            <button class="reaction-btn"><span>💬 7</span></button>
+            <button class="reaction-btn"><span>🔁 4</span></button>
+            <button class="reaction-btn"><span>❤️ 14</span></button>
+          </div>
+        </div>
+      </div>
+      <!-- Example Post 2 -->
+      <div class="post-card">
+        <div class="post-avatar"><img src="https://i.pinimg.com/736x/71/f3/77/71f3773959c6d7c98579eca8eb21b954.jpg" alt="Maria"></div>
+        <div class="post-maincol">
+          <div class="post-header-row">
+            <span class="post-username">Megumi Fushigoro</span>
+            <span class="post-meta">· 8m</span>
+            <span class="post-badge">tired AF</span>
+          </div>
+          <div class="post-text">Sooo tiredd!!!! why would'nt he leave me alone!!</div>
+          <div class="reaction-bar">
+            <button class="reaction-btn"><span>💡 13</span></button>
+            <button class="reaction-btn"><span>😃 4</span></button>
+            <button class="reply-btn reaction-btn"><span>Reply</span></button>
+          </div>
+        </div>
+      </div>
+      <!-- Example Post 3 -->
+      <div class="post-card">
+        <div class="post-avatar"><img src="https://i.pinimg.com/736x/41/48/c7/4148c7e83d1a2c130f67d6c18dda8ba0.jpg" alt="Lewis"></div>
+        <div class="post-maincol">
+          <div class="post-header-row">
+            <span class="post-username">Nobara Kugisaki</span>
+            <span class="post-meta">· 22m</span>
+          </div>
+          <div class="post-text">Got him under control ^^</div>
+          <div class="post-media">
+            <img src="https://i.pinimg.com/736x/08/ce/3b/08ce3bd3bc59c4e11188d0098cc2c3d6.jpg" alt="Art by Lewis">
+          </div>
+          <div class="reaction-bar">
+            <button class="reaction-btn"><span>❤️ 29</span></button>
+            <button class="reaction-btn"><span>💬 11</span></button>
+            <button class="reaction-btn"><span>🔁 2</span></button>
+          </div>
+        </div>
+      </div>
+      <!-- Example Post 4 -->
+      <div class="post-card">
+        <div class="post-avatar"><img src="https://i.pinimg.com/736x/91/74/ca/9174cab6594a80629302341414086725.jpg" alt="Pia"></div>
+        <div class="post-maincol">
+          <div class="post-header-row">
+            <span class="post-username">Ryomen Sukuna</span>
+            <span class="post-meta">· 36m</span>
+            <span class="post-badge">Contest Winner</span>
+          </div>
+          <div class="post-text">How'd you like it?</div>
+          <div class="reaction-bar">
+            <button class="reaction-btn"><span>❤️ 100</span></button>
+            <button class="reaction-btn"><span>💬 21</span></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="right-sidebar">
+    <div class="news-item">
+      <h4>News You Might Like</h4>
+      <p>Latest art exhibition announced.</p>
+      <p>Creative trends: "Dreamscapes" art style surges this week.</p>
+    </div>
+    <div class="recommendation">
+      <h4>People You Might Follow</h4>
+      <p>Pia Fernandez <span class="badge">Trending</span></p>
+      <p>CreativeSoul <span class="badge">Storyteller</span></p>
+      <p>Maria de Souza <span class="badge">Community Lead</span></p>
+    </div>
+    <div style="margin-top:20px;">
+      <b>Feed Filters:</b>
+      <select>
+        <option>Trending</option>
+        <option>My Interests</option>
+        <option>Nearby Creators</option>
+      </select>
+    </div>
+  </div>
+</body>
+</html>

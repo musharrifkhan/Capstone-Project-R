@@ -343,15 +343,30 @@ body {
   box-shadow: 0 10px 22px #48267366;
   transform: scale(1.05);
 }
-@media (max-width: 1150px) {
-  #right-sidebar { display: none; }
-  #settings-main-content, .settings-option-list { max-width: none;}
-  .logout-bottom-btn {
-    right: 16px;
-    bottom: 16px;
-    padding: 11px 18px;
-    font-size: 1em;
+ @media (max-width: 600px) {
+  #navbar {
+    display: none !important;
   }
+  #right-sidebar {
+    display: none !important;
+  }
+  #main-content {
+    width: 100vw !important;
+    max-width: 100vw !important;
+    min-width: 0 !important;
+    padding: 0 !important;
+  }
+  #container {
+    flex-direction: column;
+    padding-top: 0 !important;
+    width: 100vw !important;
+    max-width: 100vw !important;
+    min-width: 0 !important;
+  }
+  body {
+    padding-top: 0 !important;
+  }
+}
 }
 </style>
 </head>

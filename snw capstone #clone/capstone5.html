@@ -3,313 +3,534 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Chatter Art Connect - Community & Collage</title>
+<title>Community & Collage</title>
+
+<link href="https://fonts.googleapis.com/css?family=Soria:400,700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css?family=Manrope:400,700&display=swap" rel="stylesheet"/>
 <style>
-  body {
-    font-family: 'Segoe UI', Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background:#f0f2f5;
-    display: flex;
-    flex-direction: row;
-    min-height: 100vh;
-    overflow: hidden;
-  }
-  #sidebar {
-    width: 260px;
-    background: white;
-    padding: 20px 14px 0;
-    border-right: 1px solid #dde3ea;
-    height: 100vh;
-    box-sizing: border-box;
-    flex-shrink: 0;
-    display: flex;
-    flex-direction: column;
-  }
-  .sidebar-nav {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-  .sidebar-nav li {
-    margin: 18px 0;
-  }
-  .sidebar-link-btn {
-    display: flex;
-    align-items: center;
-    gap: 13px;
-    text-decoration: none;
-    color: #2851cb;
-    font-weight: bold;
-    font-size: 1.06em;
-    background: #f4f8ff;
-    border-radius: 18px;
-    padding: 12px 18px;
-    border: none;
-    transition: background 0.17s, color 0.15s, box-shadow 0.18s;
-    box-shadow: 0 1px 6px #afc1ff18;
-    cursor: pointer;
-  }
-  .sidebar-link-btn:hover,
-  .sidebar-link-btn.active {
-    background: linear-gradient(95deg,#5090f6 65%,#8F60E6 130%);
-    color: #fff;
-    box-shadow: 0 4px 20px #6387f23e;
-    text-decoration: none;
-  }
-  .sidebar-icon {
-    font-size: 1.3em;
-    width: 23px;
-    text-align: center;
-  }
-  .badge {
-    background: #afc1ff;
-    border-radius: 12px;
-    padding: 2px 8px;
-    font-size: 0.85em;
-    margin-left: 6px;
-    color: #3357A0;
-  }
-  #community-main-content {
-    flex-grow: 1;
-    background: white;
-    padding: 0 30px;
-    border-right: 1px solid #ddd;
-    box-sizing: border-box;
-    height: 100vh;
-    overflow-y: auto;
-    display: flex;
-    flex-direction: column;
-  }
-  .community-header {
-    font-size: 2em;
-    font-weight: bold;
-    padding: 28px 0 10px 0;
-    letter-spacing: 1px;
-  }
-  .community-btn-row {
-    display: flex;
-    gap: 14px;
-    margin-bottom: 22px;
-  }
-  .community-btn {
-    padding: 10px 26px;
-    border-radius: 22px;
-    border: none;
-    outline: none;
-    background: #f5f5f7;
-    font-size: 1em;
-    font-weight: 600;
-    color: #333;
-    cursor: pointer;
-    transition: background 0.18s, color 0.18s;
-  }
-  .community-btn.selected,
-  .community-btn:hover {
-    background: #1DA1F2;
-    color: white;
-  }
-  .joined-communities, .recommended-communities {
-    background: #f9fafc;
-    border-radius: 14px;
-    border: 1px solid #eee;
-    margin-bottom: 24px;
-    padding: 18px;
-  }
-  .joined-title, .recommended-title {
-    font-weight: bold;
-    font-size: 1.15em;
-    margin-bottom: 10px;
-  }
-  .community-list, .recommended-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-  .community-list-item, .recommended-list-item {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    padding: 10px;
-    border-radius: 11px;
-    margin-bottom: 9px;
-    background: #e6f7ff;
-    font-size: 1em;
-    font-weight: 500;
-    cursor: pointer;
-    transition: background 0.12s;
-  }
-  .community-list-item:hover, .recommended-list-item:hover {
-    background: #d7ffec;
-  }
-  .community-avatar {
-    width: 33px;
-    height: 33px;
-    border-radius: 50%;
-    background: #ececec;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.1em;
-    flex-shrink: 0;
-  }
-  .collage-container {
-    background: #f9fafc;
-    border-radius: 15px;
-    border: 1px solid #eee;
-    padding: 22px;
-    margin-bottom: 22px;
-    margin-top: 10px;
-    min-height: 260px;
-    max-width: 100%;
-    box-shadow: 0 2px 6px #ececec40;
-  }
-  .collage-title {
-    font-weight: bold;
-    font-size: 1.15em;
-    margin-bottom: 14px;
-  }
-  .collage-preview-box {
-    background: #edf7f6;
-    border: 1px solid #c6e0e8;
-    border-radius: 11px;
-    min-height: 120px;
-    padding: 16px;
-    margin-bottom: 10px;
-    font-size: 1.05em;
-    color: #3b575a;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .collage-instructions {
-    color: #647574;
-    font-size: 1em;
-    margin-bottom: 7px;
-  }
-  .hidden {display: none;}
-  #right-sidebar {
-    width: 320px;
-    background: white;
-    padding: 10px;
-    height: 100vh;
-    overflow-y: auto;
-    box-sizing: border-box;
-    flex-shrink: 0;
-    border-left: 1px solid #dde3ea;
-  }
-  .news-item, .recommendation {
-    padding: 10px 0;
-    border-bottom: 1px solid #eee;
-  }
-</style>
-<script>
-function showSection(section) {
-  document.getElementById("communities-section").classList.toggle("hidden", section !== "communities");
-  document.getElementById("collage-section").classList.toggle("hidden", section !== "collage");
-  document.getElementById("communities-btn").classList.toggle("selected", section === "communities");
-  document.getElementById("collage-btn").classList.toggle("selected", section === "collage");
+body {
+  font-family: 'Soria', serif;
+  margin: 0;
+  padding: 0;
+  background: #f0f2f5;
+  min-height: 100vh;
+  overflow-x: hidden;
+  color: #301008;
 }
-</script>
+#navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 86px;
+  background-color: white;
+  z-index: 110;
+  box-shadow: 0 2px 10px #48267318;
+  display: flex;
+  align-items: flex-start;
+  padding: 0 34px 0 18px;
+}
+.navbar-content {
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  gap: 24px;
+  max-width: 1390px;
+  margin: 0 auto;
+  position: relative;
+  height: 86px;
+}
+.navbar-logo {
+  font-family: 'Soria', serif;
+  font-size: 2.03em;
+  font-weight: bold;
+  color: #482673;
+  letter-spacing: 1.2px;
+  user-select: none;
+  text-align: left;
+  padding-left: 8px;
+  margin-right: 32px;
+  background: rgba(255,255,255,0.54);
+  border-radius: 8px;
+  padding-right: 14px;
+  display: flex;
+  align-items: flex-start;
+  margin-top: 0px;
+  height: 80px;
+}
+.navbar-logo img {
+  display: block;
+  margin-top: 1px;
+}
+.navbar-links {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-left: 0;
+  flex: 1;
+  padding-top: 18px;
+}
+.navbar-link {
+  position: relative;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #482673;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  font-size: 1.11em;
+  padding: 8px 14px 5px 14px;
+  background: none;
+  border: none;
+  outline: none;
+  font-family: 'Manrope', sans-serif;
+  transition: color 0.15s, background 0.16s;
+  cursor: pointer;
+  height: 34px;
+}
+.navbar-link:hover {
+  color: #301008;
+  background: #e7dee6;
+}
+.navbar-link.active, .navbar-link:focus {
+  color: #301008;
+}
+.navbar-link::after {
+  content: '';
+  position: absolute;
+  left: 14px;
+  right: 14px;
+  bottom: 0;
+  height: 0;
+  background: #482673;
+  border-radius: 2px;
+  transition: height 0.18s, background 0.18s;
+}
+.navbar-link:hover::after, .navbar-link.active::after {
+  height: 3px;
+  background: #482673;
+}
+.badge {
+  background: #482673;
+  border-radius: 12px;
+  padding: 2px 8px;
+  font-size: 0.90em;
+  margin-left: 6px;
+  color: #fff;
+  display: inline-block;
+}
+#logout-btn {
+  position: absolute;
+  right: 0;
+  top: 20px;
+  background: #fff;
+  border: 2px solid #482673;
+  color: #482673;
+  font-weight: bold;
+  padding: 8px 24px;
+  border-radius: 15px;
+  font-size: 1.05em;
+  font-family: 'Manrope', sans-serif;
+  box-shadow: 0 1px 6px #ed0b7013;
+  cursor: pointer;
+  transition: background 0.19s, color 0.13s, border 0.13s;
+  z-index: 1000;
+  margin-bottom: 1px;
+}
+#logout-btn:hover {
+  background: #482673;
+  color: #fff;
+  border: 2px solid #482673;
+}
+#container {
+  display: flex;
+  flex-direction: row;
+  padding-top: 100px;
+  min-height: 100vh;
+}
+#community-main-content {
+  flex: 1 1 0;
+  background-image: url("https://t4.ftcdn.net/jpg/03/05/14/31/360_F_305143126_Bf1ibYnBMEItIjiHFvpQPKPx7VQrWmEY.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-attachment: fixed;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 340px;
+  overflow-y: auto;
+  min-height: 230vh;
+  height: 100%;
+  box-sizing: border-box;
+}
+.community-header {
+  font-family: 'Soria', serif;
+  font-size: 2.15em;
+  font-weight: bold;
+  color: #482673;
+  padding: 32px 0 20px 0;
+  letter-spacing: 1.2px;
+  width: 98%;
+  max-width: 690px;
+  text-align: left;
+}
+.community-btn-row {
+  display: flex;
+  gap: 14px;
+  margin: 10px 0 24px 0;
+  width: 98%;
+  max-width: 700px;
+  font-family: 'Manrope', sans-serif;
+}
+.community-btn {
+  padding: 10px 26px;
+  border-radius: 20px;
+  border: none;
+  background: #d7cffb;
+  font-size: 1.07em;
+  font-weight: bold;
+  color: #482673;
+  cursor: pointer;
+  font-family: 'Manrope', sans-serif;
+  transition: box-shadow 0.18s, background 0.18s, color 0.18s, transform 0.18s;
+  box-shadow: 0 1px 6px #ed0b7013;
+}
+.community-btn.selected,
+.community-btn:hover {
+  background: #482673;
+  color: #fff;
+  transform: scale(1.05);
+  box-shadow: 0 7px 22px #4cbfa622;
+}
+.joined-communities, .recommended-communities {
+  background: #f6ebf4e9;
+  border-radius: 8px;
+  box-shadow: 0 1px 15px #48267310;
+  margin-bottom: 23px;
+  padding: 22px 32px;
+  width: 98%;
+  max-width: 700px;
+  font-family: 'Manrope', sans-serif;
+  transition: box-shadow 0.18s, background 0.18s, color 0.18s, transform 0.18s;
+}
+.joined-communities:hover, .recommended-communities:hover {
+  background: #fff;
+  box-shadow: 0 8px 40px #48267327;
+}
+.joined-title, .recommended-title {
+  font-family: 'Soria', serif;
+  font-size: 1.21em;
+  font-weight: bold;
+  color: #482673;
+  margin-bottom: 12px;
+}
+.community-list, .recommended-list {
+  list-style: none;
+  padding: 0; margin: 0;
+  display: flex; flex-direction: column; gap: 12px;
+}
+.community-list-item, .recommended-list-item {
+  display: flex;
+  align-items: center;
+  gap: 17px;
+  padding: 14px;
+  border-radius: 15px;
+  margin-bottom: 0;
+  background: #fff;
+  font-size: 1.08em;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: 'Manrope', sans-serif;
+  transition: background 0.15s, box-shadow 0.14s, transform 0.14s;
+  color: #301008;
+  box-shadow: 0 1px 6px #ed0b7010;
+}
+.community-list-item:hover, .recommended-list-item:hover {
+  background: #f6ebf4;
+  box-shadow: 0 7px 18px #ed0b7015;
+  transform: scale(1.012);
+}
+.community-avatar {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: #4cbfa619;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5em;
+  color: #482673;
+  flex-shrink: 0;
+  border: 2.5px solid #482673;
+  font-family: 'Soria', serif;
+  box-shadow: 0 2px 10px #b2def522;
+}
+.collage-container {
+  background: #f6ebf4e9;
+  border-radius: 8px;
+  box-shadow: 0 1px 15px #48267310;
+  border: none;
+  padding: 22px 32px;
+  margin-bottom: 22px;
+  margin-top: 10px;
+  min-height: 260px;
+  max-width: 98%;
+  box-sizing: border-box;
+  font-family: 'Manrope', sans-serif;
+  transition: box-shadow 0.18s, background 0.18s, color 0.18s, transform 0.18s;
+}
+.collage-container:hover {
+  background: #fff;
+  box-shadow: 0 8px 40px #48267327;
+}
+.collage-title {
+  font-family: 'Soria', serif;
+  font-weight: bold;
+  font-size: 1.17em;
+  color: #482673;
+  margin-bottom: 14px;
+}
+.collage-instructions {
+  color: #647574;
+  font-size: 1.07em;
+  margin-bottom: 10px;
+  font-family: 'Manrope', sans-serif;
+}
+.collage-preview-box {
+  background: #edf7f6;
+  border: 1px solid #c6e0e8;
+  border-radius: 11px;
+  min-height: 120px;
+  padding: 16px;
+  margin-bottom: 10px;
+  font-size: 1.08em;
+  color: #3b575a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 8px #c8e2db40;
+  font-family: 'Manrope', sans-serif;
+}
+.collage-preview-box img {
+  max-height: 60px; max-width:140px; vertical-align: middle;
+  border-radius: 8px; box-shadow: 0 0 5px #c8e2db;
+  margin-bottom: 4px;
+}
+.hidden { display: none; }
+#right-sidebar {
+  width: 330px;
+  background: #fff;
+  padding: 36px 18px 18px 25px;
+  margin: 0 auto;
+  height: 230vh;
+  overflow-y: auto;
+  box-sizing: border-box;
+  flex-shrink: 0;
+  border-left: 1px solid #dde3ea;
+}
+.section-box {
+  background: #f6ebf4;
+  border-radius: 18px;
+  padding: 20px 18px 18px 22px;
+  margin-bottom: 18px;
+  box-shadow: 0 1px 8px #30100813;
+  font-family: 'Manrope', sans-serif;
+  transition: box-shadow 0.15s, transform 0.13s;
+}
+.section-box:hover {
+  box-shadow: 0 10px 28px #4cbfa622;
+  transform: scale(1.03);
+}
+.section-box h4 {
+  font-family: 'Soria', serif;
+  font-weight: bold;
+  color: #482673;
+  margin-bottom: 10px;
+  font-size: 1.14em;
+}
+.section-box p, .section-box b {
+  color: #301008;
+  font-size: 1em;
+  font-family: 'Manrope', sans-serif;
+}
+.feed-filter-section {
+  background: #d7cffb;
+  border-radius: 13px;
+  padding: 13px 18px;
+  margin-top: 19px;
+  font-family: 'Manrope', sans-serif;
+  box-shadow: 0 1px 8px #ed0b7013;
+  transition: box-shadow 0.15s, transform 0.12s;
+}
+.feed-filter-section:hover {
+  box-shadow: 0 8px 17px #4cbfa655;
+  transform: scale(1.02);
+}
+.feed-filter-section select {
+  background: #f6ebf4;
+  border-radius: 8px;
+  border: none;
+  padding: 7px 10px;
+  color: #482673;
+  font-weight: 600;
+  margin-top: 8px;
+  font-family: 'Manrope', sans-serif;
+  box-shadow: 0 1px 5px #ed0b7015;
+  transition: background 0.12s;
+  font-size: 1em;
+}
+.feed-filter-section select:focus {
+  outline: none;
+  background: #4cbfa610;
+}
+@media (max-width: 1150px) {
+  #right-sidebar { display: none; }
+  #community-main-content, .joined-communities, .recommended-communities, .collage-container { max-width: none;}
+  #container {padding-left: 0;}
+}
+</style>
+
 </head>
 <body>
-  <div id="sidebar">
-    <div style="margin-bottom:10px;"><img src="https://cdn.leonardo.ai/users/72f787c0-709d-4382-a718-596433668068/generations/c83312d9-d0ff-4607-9e1f-f013b99751b2/segments/3:4:1/Lucid_Origin_A_modern_Gen_Z_logo_for_Chatter_Art_Connectvibran_2.jpg" alt="Chatter Art Connect Logo" width =100px style="width:100%;"/></div>
-    <nav>
-      <ul class="sidebar-nav">
-        <li><a class="sidebar-link-btn" href="home.html"><span class="sidebar-icon">🏠</span> Home</a></li>
-        <li><a class="sidebar-link-btn" href="explore.html"><span class="sidebar-icon">🔍</span> Explore</a></li>
-        <li><a class="sidebar-link-btn" href="notifications.html"><span class="sidebar-icon">🔔</span> Notifications <span class="badge">3</span></a></li>
-        <li><a class="sidebar-link-btn" href="messages.html"><span class="sidebar-icon">💬</span> Messages <span class="badge">2</span></a></li>
-        <li><a class="sidebar-link-btn active" href="community.html"><span class="sidebar-icon">🌐</span> Community & Collage</a></li>
-        <li><a class="sidebar-link-btn" href="profile.html"><span class="sidebar-icon">👤</span> Profile</a></li>
-        <li><a class="sidebar-link-btn" href="settings.html"><span class="sidebar-icon">⚙️</span> Settings</a></li>
-      </ul>
-    </nav>
+  <div id="navbar">
+    <div class="navbar-content">
+      <span class="navbar-logo">
+        <img src="plixy.png" alt="logo" style="width:120px;height:80px;">
+      </span>
+      <nav class="navbar-links">
+        <a class="navbar-link" href="home.html">Home</a>
+        <a class="navbar-link" href="explore.html">Explore</a>
+        <a class="navbar-link" href="notifications.html">Notifications  </a>
+        <a class="navbar-link" href="messages.html"> Messages </a>
+        <a class="navbar-link active" href="community.html">Community & Collage</a>
+        <a class="navbar-link" href="profile.html">Profile</a>
+        <a class="navbar-link" href="settings.html">Settings</a>
+      </nav>
+      <button id="logout-btn">Logout</button>
+    </div>
   </div>
-  <div id="community-main-content">
-    <div class="community-header">Community & Collage</div>
-    <div class="community-btn-row">
-      <button class="community-btn selected" id="communities-btn" onclick="showSection('communities')">My Communities</button>
-      <button class="community-btn" id="collage-btn" onclick="showSection('collage')">Collage</button>
-    </div>
-    <!-- Communities section -->
-    <div id="communities-section">
-      <div class="joined-communities">
-        <div class="joined-title">Your Communities</div>
-        <ul class="community-list">
-          <li class="community-list-item">
-            <span class="community-avatar">🎨</span>
-            <span>Art Lovers</span>
-          </li>
-          <li class="community-list-item">
-            <span class="community-avatar">🎵</span>
-            <span>Indie Musicians</span>
-          </li>
-          <li class="community-list-item">
-            <span class="community-avatar">🖼️</span>
-            <span>Modern Deco</span>
-          </li>
-        </ul>
+  <div id="container">
+    <div id="community-main-content">
+      <div class="community-header"></div>
+      <div class="community-btn-row">
+        <button class="community-btn selected" id="communities-btn" onclick="showSection('communities')">My Communities</button>
+        <button class="community-btn" id="collage-btn" onclick="showSection('collage')">Collage</button>
       </div>
-      <div class="recommended-communities">
-        <div class="recommended-title">Recommended Communities</div>
-        <ul class="recommended-list">
-          <li class="recommended-list-item">
-            <span class="community-avatar">🌍</span>
-            <span>Global Collage</span>
-          </li>
-          <li class="recommended-list-item">
-            <span class="community-avatar">💡</span>
-            <span>Creative Ideas</span>
-          </li>
-          <li class="recommended-list-item">
-            <span class="community-avatar">✏️</span>
-            <span>Storytellers Club</span>
-          </li>
-        </ul>
-      </div>
-    </div>
-    <!-- Collage section, initially hidden -->
-    <div id="collage-section" class="hidden">
-      <div class="collage-container">
-        <div class="collage-title">Live Collage Workspace</div>
-        <div class="collage-instructions">
-          Collaborate in real time! Multiple members can edit this photo or text simultaneously.<br>
-          To join, simply click an element to modify. Changes will reflect for all members instantly.<br>
-          (Demo below; for full real-time editing, add JS & backend)
+      <div id="communities-section">
+        <div class="joined-communities">
+          <div class="joined-title">Your Communities</div>
+          <ul class="community-list">
+            <li class="community-list-item">
+              <span class="community-avatar">🎨</span>
+              <span>Art Lovers</span>
+            </li>
+            <li class="community-list-item">
+              <span class="community-avatar">🎵</span>
+              <span>Indie Musicians</span>
+            </li>
+            <li class="community-list-item">
+              <span class="community-avatar">🖼️</span>
+              <span>Modern Deco</span>
+            </li>
+          </ul>
         </div>
-        <div class="collage-preview-box">
+        <div class="recommended-communities">
+          <div class="recommended-title">Recommended Communities</div>
+          <ul class="recommended-list">
+            <li class="recommended-list-item">
+              <span class="community-avatar">🌍</span>
+              <span>Global Collage</span>
+            </li>
+            <li class="recommended-list-item">
+              <span class="community-avatar">💡</span>
+              <span>Creative Ideas</span>
+            </li>
+            <li class="recommended-list-item">
+              <span class="community-avatar">✏️</span>
+              <span>Storytellers Club</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div id="collage-section" class="hidden">
+        <div class="collage-container">
+          <div class="collage-title">Live Collage Workspace</div>
+          <div class="collage-instructions">
+            Collaborate in real time! Multiple members can edit this photo or text simultaneously.<br>
+            To join, simply click an element to modify. Changes will reflect for all members instantly.<br>
+            (Demo below; for full real-time editing, add JS & backend)
+          </div>
+          <div class="collage-preview-box">
+            <div>
+              <img src="sample-collage.jpg" alt="Collage Preview">
+              <br>
+              <span>Current Caption: "Dreamscapes in Motion"</span>
+            </div>
+          </div>
+          <button style="padding:8px 20px; border-radius:15px; border:none; background:#482673; color:white; font-weight:bold;">
+            Join & Edit
+          </button>
+        </div>
+      </div>
+    </div>
+    <div id="right-sidebar">
+      <div class="section-box">
+        <h4>News You Might Like</h4>
+        <div style="display: flex; align-items: flex-start; gap: 17px; margin-bottom:15px;">
+          <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=70&h=70&fit=cover" alt="Exhibit Art" style="width:70px;height:70px;border-radius:9px;object-fit:cover;">
           <div>
-            <img src="sample-collage.jpg" alt="Collage Preview" style="max-height:60px; max-width:140px; vertical-align:middle; border-radius:8px; box-shadow:0 0 5px #c8e2db;">
-            <br>
-            <span>Current Caption: "Dreamscapes in Motion"</span>
+            <b>Vivid Minds Exhibit</b><br>
+            A new immersive art show opens in Berlin, blending digital and traditional media. <br>
+            <span style="color:#9b5de5;font-size:.9em;">11 min ago</span>
           </div>
         </div>
-        <button style="padding:8px 20px; border-radius:15px; border:none; background:#1DA1F2; color:white; font-weight:bold;">
-          Join & Edit
-        </button>
+        <div style="display: flex; align-items: flex-start; gap: 17px; margin-bottom:15px;">
+          <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=70&h=70&fit=cover" alt="Sculpture Reveal" style="width:70px;height:70px;border-radius:9px;object-fit:cover;">
+          <div>
+            <b>Skyline Sculpture Unveiled</b><br>
+            Urban artist Nala drops a 20-ft kinetic sculpture in NYC’s Central Park. <br>
+            <span style="color:#9b5de5;font-size:.9em;">Today</span>
+          </div>
+        </div>
+        <div style="display: flex; align-items: flex-start; gap: 17px; margin-bottom:15px;">
+          <img src="https://images.unsplash.com/photo-1424746219973-8fe3bd07d8e3?w=70&h=70&fit=cover" alt="AI Art Panel" style="width:70px;height:70px;border-radius:9px;object-fit:cover;">
+          <div>
+            <b>AI & Art Panel</b><br>
+            Global creators debate: “How much AI is too much in modern art?” <br>
+            <span style="color:#9b5de5;font-size:.9em;">1 hr ago</span>
+          </div>
+        </div>
+        <div style="display: flex; align-items: flex-start; gap: 17px;">
+          <img src="https://images.unsplash.com/photo-1464983953574-0892a716854b?w=70&h=70&fit=cover" alt="Color Trends" style="width:70px;height:70px;border-radius:9px;object-fit:cover;">
+          <div>
+            <b>Color Trends Report</b><br>
+            2025’s top palette: Dreamy violets & fresh whites – trending now! <br>
+            <span style="color:#9b5de5;font-size:.9em;">Yesterday</span>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
-  <div id="right-sidebar">
-    <div class="news-item">
-      <h4>News You Might Like</h4>
-      <p>Community spotlights, live events and collages this week.</p>
-    </div>
-    <div class="recommendation">
-      <h4>People You Might Follow</h4>
-      <p>Artist123 <span class="badge">Trending</span></p>
-      <p>CreativeSoul <span class="badge">Storyteller</span></p>
-      <p>CollageMaster <span class="badge">Collage Lead</span></p>
-    </div>
-    <div style="margin-top:20px;">
-      <b>Feed Filters:</b>
-      <select>
-        <option>Trending</option>
-        <option>My Interests</option>
-        <option>Nearby Creators</option>
-      </select>
+      <div class="section-box">
+        <h4>People You Might Follow</h4>
+        <p><b>Dia Chowdhary</b> <span class="badge" style="background:#482673;">Trending</span></p>
+        <p><b>Prachi Aggarwal</b> <span class="badge" style="background:#482673;">Chatpati</span></p>
+        <p><b>Deepali Agarwal</b> <span class="badge" style="background:#482673;">Chat Lead</span></p>
+        <p><b>Anirudh Singh</b> <span class="badge" style="background:#482673;">Mentor</span></p>
+        <p><b>Priya Gupta</b> <span class="badge" style="background:#482673; color: #482673;">Art Pro</span></p>
+        <p><b>Mohit Saini</b> <span class="badge" style="background:#482673;">Newbie</span></p>
+        <p><b>Jaya Pillai</b> <span class="badge" style="background:#482673;">Collab Star</span></p>
+        <p><b>Kritika Jain</b> <span class="badge" style="background:#482673; color: #482673;">Storyteller</span></p>
+        <p><b>Aditya Bhardwaj</b> <span class="badge" style="background:#482673;">Part of SIH</span></p>
+        <p><b>Yash Verma</b> <span class="badge" style="background:#482673;">Nearby</span></p>
+      </div>
+      <div class="feed-filter-section">
+        <b>Feed Filters:</b>
+        <select>
+          <option>Trending</option>
+          <option>My Interests</option>
+          <option>Nearby Creators</option>
+        </select>
+      </div>
     </div>
   </div>
 </body>

@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Home</title>
+  <title>Chatter Art Connect - Home</title>
+  
   <link href="https://fonts.googleapis.com/css?family=Soria:400,700&display=swap" rel="stylesheet"/>
   <link href="https://fonts.googleapis.com/css?family=Manrope:400,700&display=swap" rel="stylesheet"/>
   <style>
@@ -475,11 +476,30 @@
       outline: none;
       background: #4cbfa610;
     }
-    @media (max-width: 1150px) {
-      #right-sidebar { display: none; }
-      #main-content, .posts-feed, .story-highlight-card {max-width: none;}
-      #container {padding-left: 0;}
-    }
+    @media (max-width: 600px) {
+  #navbar {
+    display: none !important;
+  }
+  #right-sidebar {
+    display: none !important;
+  }
+  #main-content {
+    width: 100vw !important;
+    max-width: 100vw !important;
+    min-width: 0 !important;
+    padding: 0 !important;
+  }
+  #container {
+    flex-direction: column;
+    padding-top: 0 !important;
+    width: 100vw !important;
+    max-width: 100vw !important;
+    min-width: 0 !important;
+  }
+  body {
+    padding-top: 0 !important;
+  }
+}
   </style>
 </head>
 <body>
@@ -497,7 +517,7 @@
         <a class="navbar-link" href="profile.html">Profile</a>
         <a class="navbar-link" href="settings.html">Settings</a>
       </nav>
-      <button id="logout-btn">Logout</button>
+      
     </div>
   </div>
   <div id="container">

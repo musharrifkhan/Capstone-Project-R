@@ -3,261 +3,448 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Chatter Art Connect — Settings</title>
+<title>Settings</title>
+<link href="https://fonts.googleapis.com/css?family=Soria:400,700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css?family=Manrope:400,700&display=swap" rel="stylesheet"/>
 <style>
 body {
-  font-family: 'Segoe UI', Arial, sans-serif;
+  font-family: 'Soria', serif;
   margin: 0;
   padding: 0;
   background: #f0f2f5;
-  display: flex;
-  flex-direction: row;
   min-height: 100vh;
-  overflow: hidden;
+  overflow-x: hidden;
+  color: #301008;
 }
-#sidebar {
-  width: 260px;
-  background: white;
-  padding: 20px 14px 0;
-  border-right: 1px solid #dde3ea;
-  height: 100vh;
-  box-sizing: border-box;
-  flex-shrink: 0;
+#navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 86px;
+  background-color: white;
+  z-index: 110;
+  box-shadow: 0 2px 10px #48267318;
   display: flex;
-  flex-direction: column;
+  align-items: flex-start;
+  padding: 0 34px 0 18px;
 }
-.sidebar-nav {
-  list-style: none;
-  padding: 0;
-  margin: 0;
+.navbar-content {
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  gap: 24px;
+  max-width: 1390px;
+  margin: 0 auto;
+  position: relative;
+  height: 86px;
 }
-.sidebar-nav li { margin: 18px 0; }
-.sidebar-link-btn {
+.navbar-logo {
+  font-family: 'Soria', serif;
+  font-size: 2.03em;
+  font-weight: bold;
+  color: #482673;
+  letter-spacing: 1.2px;
+  user-select: none;
+  text-align: left;
+  padding-left: 8px;
+  margin-right: 32px;
+  background: rgba(255,255,255,0.54);
+  border-radius: 8px;
+  padding-right: 14px;
+  display: flex;
+  align-items: flex-start;
+  margin-top: 0px;
+  height: 80px;
+}
+.navbar-logo img {
+  display: block;
+  margin-top: 1px;
+}
+.navbar-links {
   display: flex;
   align-items: center;
-  gap: 13px;
+  gap: 10px;
+  margin-left: 0;
+  flex: 1;
+  padding-top: 18px;
+}
+.navbar-link {
+  position: relative;
+  display: flex;
+  align-items: center;
   text-decoration: none;
-  color: #2851cb;
-  font-weight: bold;
-  font-size: 1.06em;
-  background: #f4f8ff;
-  border-radius: 18px;
-  padding: 12px 18px;
+  color: #482673;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  font-size: 1.11em;
+  padding: 8px 14px 5px 14px;
+  background: none;
   border: none;
-  transition: background 0.17s, color 0.15s, box-shadow 0.18s;
-  box-shadow: 0 1px 6px #afc1ff18;
+  outline: none;
+  font-family: 'Manrope', sans-serif;
+  transition: color 0.15s, background 0.16s;
   cursor: pointer;
+  height: 34px;
 }
-.sidebar-link-btn:hover,
-.sidebar-link-btn.active {
-  background: linear-gradient(95deg,#5090f6 65%,#8F60E6 130%);
-  color: #fff;
-  box-shadow: 0 4px 20px #6387f23e;
-  text-decoration: none;
+.navbar-link:hover {
+  color: #301008;
+  background: #e7dee6;
 }
-.sidebar-icon {
-  font-size: 1.3em;
-  width: 23px;
-  text-align: center;
+.navbar-link.active, .navbar-link:focus {
+  color: #301008;
+}
+.navbar-link::after {
+  content: '';
+  position: absolute;
+  left: 14px;
+  right: 14px;
+  bottom: 0;
+  height: 0;
+  background: #482673;
+  border-radius: 2px;
+  transition: height 0.18s, background 0.18s;
+}
+.navbar-link:hover::after, .navbar-link.active::after {
+  height: 3px;
+  background: #482673;
 }
 .badge {
-  background: #afc1ff;
+  background: #482673;
   border-radius: 12px;
   padding: 2px 8px;
-  font-size: 0.85em;
+  font-size: 0.90em;
   margin-left: 6px;
-  color: #3357A0;
+  color: #fff;
+  display: inline-block;
+}
+#logout-btn {
+  position: absolute;
+  right: 0;
+  top: 20px;
+  background: #fff;
+  border: 2px solid #482673;
+  color: #482673;
+  font-weight: bold;
+  padding: 8px 24px;
+  border-radius: 15px;
+  font-size: 1.05em;
+  font-family: 'Manrope', sans-serif;
+  box-shadow: 0 1px 6px #ed0b7013;
+  cursor: pointer;
+  transition: background 0.19s, color 0.13s, border 0.13s;
+  z-index: 1000;
+  margin-bottom: 1px;
+}
+#logout-btn:hover {
+  background: #482673;
+  color: #fff;
+  border: 2px solid #482673;
+}
+#container {
+  display: flex;
+  flex-direction: row;
+  padding-top: 100px;
+  min-height: 100vh;
 }
 #settings-main-content {
-  flex-grow: 1;
-  background: white;
-  padding: 0 30px;
-  border-right: 1px solid #ddd;
-  box-sizing: border-box;
-  height: 100vh;
-  overflow-y: auto;
+  flex: 1 1 0;
+  background-image: url("https://t4.ftcdn.net/jpg/03/05/14/31/360_F_305143126_Bf1ibYnBMEItIjiHFvpQPKPx7VQrWmEY.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-attachment: fixed;
   display: flex;
   flex-direction: column;
+  align-items: center;
+  min-width: 340px;
+  overflow-y: auto;
+  min-height: 230vh;
+  height: 100%;
+  box-sizing: border-box;
 }
 .settings-header {
-  font-size: 2em;
+  font-family: 'Soria', serif;
+  font-size: 2.15em;
   font-weight: bold;
-  padding: 28px 0 10px 0;
-  letter-spacing: 1px;
+  color: #482673;
+  padding: 32px 0 20px 0;
+  letter-spacing: 1.2px;
+  width: 98%;
+  max-width: 690px;
+  text-align: left;
 }
 .settings-search-bar {
   width: 100%;
   box-sizing: border-box;
   margin-bottom: 18px;
+  max-width: 700px;
 }
 .settings-search-bar input {
   width: 100%;
-  padding: 11px;
-  border-radius: 14px;
+  padding: 13px;
+  border-radius: 18px;
   border: 1px solid #e9ecef;
-  font-size: 1em;
+  font-size: 1.13em;
   outline: none;
   background: #f5f5f7;
+  font-family: 'Manrope', sans-serif;
 }
 .settings-option-list {
   list-style: none;
   padding: 0;
+  margin: 0 auto;
+  width: 98%;
+  max-width: 650px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 .settings-option {
-  padding: 14px 17px;
-  border-radius: 12px;
-  font-size: 1.08em;
-  color: #21445e;
+  padding: 13px 18px;
+  border-radius: 18px;
+  font-size: 1.07em;
+  color: #482673;
   cursor: pointer;
-  font-weight: 500;
-  margin-bottom: 8px;
-  transition: background 0.18s, color 0.18s;
-  display: flex; align-items: center;
+  font-weight: 700;
+  margin-bottom: 12px;
+  transition: background 0.18s, color 0.18s, transform 0.16s, box-shadow 0.16s;
+  display: flex; align-items: center; justify-content: left;
+  background: #f6ebf4e9;
+  box-shadow: 0 1px 11px #48267310;
+  font-family: 'Manrope', sans-serif;
+  min-height: 44px;
+  width: 100%;
+  max-width: 650px;
 }
 .settings-option:hover,
 .settings-option.active {
-  background: #1DA1F2;
+  background: #482673;
   color: white;
+  transform: scale(1.03);
+  box-shadow: 0 8px 30px #ed0b7025;
 }
 #right-sidebar {
-  width: 320px;
-  background: white;
-  padding: 18px 14px;
-  height: 100vh;
+  width: 330px;
+  background: #fff;
+  padding: 36px 18px 18px 25px;
+  margin: 0 auto;
+  height: 230vh;
   overflow-y: auto;
   box-sizing: border-box;
   flex-shrink: 0;
   border-left: 1px solid #dde3ea;
-  transition: background 0.16s;
+}
+.section-box {
+  background: #f6ebf4;
+  border-radius: 18px;
+  padding: 20px 18px 18px 22px;
+  margin-bottom: 18px;
+  box-shadow: 0 1px 8px #30100813;
+  font-family: 'Manrope', sans-serif;
+  transition: box-shadow 0.15s, transform 0.13s;
+}
+.section-box:hover {
+  box-shadow: 0 10px 28px #4cbfa622;
+  transform: scale(1.03);
+}
+.section-box h4 {
+  font-family: 'Soria', serif;
+  font-weight: bold;
+  color: #482673;
+  margin-bottom: 10px;
+  font-size: 1.14em;
+}
+.section-box p, .section-box b {
+  color: #301008;
+  font-size: 1em;
+  font-family: 'Manrope', sans-serif;
+}
+.feed-filter-section {
+  background: #d7cffb;
+  border-radius: 13px;
+  padding: 13px 18px;
+  margin-top: 19px;
+  font-family: 'Manrope', sans-serif;
+  box-shadow: 0 1px 8px #ed0b7013;
+  transition: box-shadow 0.15s, transform 0.12s;
+}
+.feed-filter-section:hover {
+  box-shadow: 0 8px 17px #4cbfa655;
+  transform: scale(1.02);
+}
+.feed-filter-section select {
+  background: #f6ebf4;
+  border-radius: 8px;
+  border: none;
+  padding: 7px 10px;
+  color: #482673;
+  font-weight: 600;
+  margin-top: 8px;
+  font-family: 'Manrope', sans-serif;
+  box-shadow: 0 1px 5px #ed0b7015;
+  transition: background 0.12s;
+  font-size: 1em;
+}
+.feed-filter-section select:focus {
+  outline: none;
+  background: #4cbfa610;
 }
 .settings-panel {
   font-size: 1.09em;
+  font-family: 'Manrope', sans-serif;
+  width: 100%;
+  max-width: 650px;
+  margin: 0 auto;
 }
 .settings-panel h3 {
-  font-size: 1.18em;
+  font-family: 'Soria', serif;
+  font-size: 1.15em;
   margin-top: 0;
-  margin-bottom: 14px;
-  color: #1DA1F2;
+  margin-bottom: 12px;
+  color: #482673;
 }
 .settings-action {
   margin: 10px 0;
-  padding: 11px;
-  border-radius: 10px;
-  background: #f7fbfd;
+  padding: 13px 18px;
+  border-radius: 13px;
+  background: #f9fafc;
   border: 1px solid #e0e8ea;
-  transition: background 0.17s;
-  cursor: pointer;
+  color: #482673;
+  font-weight: bold;
+  font-family: 'Manrope', sans-serif;
+  transition: background 0.18s, color 0.18s;
+  font-size: 1em;
 }
 .settings-action:hover {
-  background: #e6f7ff;
+  background: #f6ebf4;
+  color: #482673;
+  box-shadow: 0 7px 18px #ed0b7015;
+}
+.logout-bottom-btn {
+  position: fixed;
+  right: 32px;
+  bottom: 30px;
+  z-index: 100;
+  padding: 13px 28px;
+  border-radius: 18px;
+  border: none;
+  background: #482673;
+  color: #fff;
+  font-size: 1.05em;
+  font-family: 'Manrope', sans-serif;
+  font-weight: bold;
+  box-shadow: 0 4px 17px #ed0b7025;
+  cursor: pointer;
+  transition: background 0.18s, box-shadow 0.18s, transform 0.15s;
+}
+.logout-bottom-btn:hover {
+  background: #321459;
+  box-shadow: 0 10px 22px #48267366;
+  transform: scale(1.05);
+}
+@media (max-width: 1150px) {
+  #right-sidebar { display: none; }
+  #settings-main-content, .settings-option-list { max-width: none;}
+  .logout-bottom-btn {
+    right: 16px;
+    bottom: 16px;
+    padding: 11px 18px;
+    font-size: 1em;
+  }
 }
 </style>
-<script>
-function showPanel(panel) {
-  document.querySelectorAll(".settings-option").forEach(e =>
-    e.classList.remove("active"));
-  document.getElementById("option-"+panel).classList.add("active");
-  const panels = {
-    "your-account": `
-      <div class="settings-panel">
-        <h3>Your Account</h3>
-        <div class="settings-action">Account Information</div>
-        <div class="settings-action">Change Password</div>
-        <div class="settings-action">Download Archives</div>
-        <div class="settings-action">Deactivate Your Account</div>
-      </div>
-    `,
-    "monetization": `<div class="settings-panel"><h3>Monetization</h3>
-      <div class="settings-action">View Monetization Options</div>
-      <div class="settings-action">Apply for Creator Rewards</div>
-      <div class="settings-action">Manage Payouts</div>
-    </div>`,
-    "premium": `<div class="settings-panel"><h3>Premium Features</h3>
-      <div class="settings-action">Upgrade to Premium</div>
-      <div class="settings-action">Manage Subscription</div>
-      <div class="settings-action">Premium Support</div>
-    </div>`,
-    "creator": `<div class="settings-panel"><h3>Creator Settings</h3>
-      <div class="settings-action">Creator Profile</div>
-      <div class="settings-action">Analytics Dashboard</div>
-      <div class="settings-action">Content Collaboration</div>
-    </div>`,
-    "dissubscription": `<div class="settings-panel"><h3>Dissubscription</h3>
-      <div class="settings-action">Unsubscribe from Premium</div>
-      <div class="settings-action">Manage Dissubscription Preferences</div>
-      <div class="settings-action">Feedback</div>
-    </div>`,
-    "accessibility": `<div class="settings-panel"><h3>Accessibility</h3>
-      <div class="settings-action">Adjust Font Size</div>
-      <div class="settings-action">Enable High Contrast</div>
-      <div class="settings-action">Screen Reader Options</div>
-    </div>`,
-    "privacy-safety": `<div class="settings-panel"><h3>Privacy & Safety</h3>
-      <div class="settings-action">Manage Privacy Settings</div>
-      <div class="settings-action">Blocked Accounts</div>
-      <div class="settings-action">Security</div>
-    </div>`,
-    "notification": `<div class="settings-panel"><h3>Notifications</h3>
-      <div class="settings-action">Push Notifications</div>
-      <div class="settings-action">Email Alerts</div>
-      <div class="settings-action">Mute Groups</div>
-    </div>`,
-    "help-center": `<div class="settings-panel"><h3>Help Center</h3>
-      <div class="settings-action">Contact Support</div>
-      <div class="settings-action">FAQs</div>
-      <div class="settings-action">Report a Problem</div>
-    </div>`,
-    "additional-resources": `<div class="settings-panel"><h3>Additional Resources</h3>
-      <div class="settings-action">Community Guidelines</div>
-      <div class="settings-action">API Access</div>
-      <div class="settings-action">Developer Tools</div>
-    </div>`
-  };
-  document.getElementById("right-sidebar").innerHTML = panels[panel];
-}
-</script>
 </head>
 <body>
-  <div id="sidebar">
-    <div style="margin-bottom:10px;"><img src="logo.png" alt="Chatter Art Connect Logo" style="width:100%;"/></div>
-    <nav>
-      <ul class="sidebar-nav">
-        <li><a class="sidebar-link-btn" href="home.html"><span class="sidebar-icon">🏠</span> Home</a></li>
-        <li><a class="sidebar-link-btn" href="explore.html"><span class="sidebar-icon">🔍</span> Explore</a></li>
-        <li><a class="sidebar-link-btn" href="notifications.html"><span class="sidebar-icon">🔔</span> Notifications <span class="badge">3</span></a></li>
-        <li><a class="sidebar-link-btn" href="messages.html"><span class="sidebar-icon">💬</span> Messages <span class="badge">2</span></a></li>
-        <li><a class="sidebar-link-btn" href="community.html"><span class="sidebar-icon">🌐</span> Community & Collage</a></li>
-        <li><a class="sidebar-link-btn" href="profile.html"><span class="sidebar-icon">👤</span> Profile</a></li>
-        <li><a class="sidebar-link-btn active" href="settings.html"><span class="sidebar-icon">⚙️</span> Settings</a></li>
+  <div id="navbar">
+    <div class="navbar-content">
+      <span class="navbar-logo">
+        <img src="plixy.png" alt="logo" style="width:120px;height:80px;">
+      </span>
+      <nav class="navbar-links">
+        <a class="navbar-link" href="home.html">Home</a>
+        <a class="navbar-link" href="explore.html">Explore</a>
+        <a class="navbar-link" href="notifications.html">Notifications  </a>
+        <a class="navbar-link" href="messages.html"> Messages </a>
+        <a class="navbar-link" href="community.html">Community & Collage</a>
+        <a class="navbar-link" href="profile.html">Profile</a>
+        <a class="navbar-link active" href="settings.html">Settings</a>
+      </nav>
+      <button id="logout-btn">Logout</button>
+    </div>
+  </div>
+  <div id="container">
+    <div id="settings-main-content">
+      <div class="settings-header"></div>
+      <div class="settings-search-bar">
+        <input type="text" placeholder="Search Settings">
+      </div>
+      <ul class="settings-option-list">
+        <li class="settings-option active">Your Account</li>
+        <li class="settings-option">Monetization</li>
+        <li class="settings-option">Premium</li>
+        <li class="settings-option">Creator</li>
+        <li class="settings-option">Dissubscription</li>
+        <li class="settings-option">Accessibility</li>
+        <li class="settings-option">Privacy & Safety</li>
+        <li class="settings-option">Notification</li>
+        <li class="settings-option">Help Center</li>
+        <li class="settings-option">Additional Resources</li>
       </ul>
-    </nav>
-  </div>
-  <div id="settings-main-content">
-    <div class="settings-header">Settings</div>
-    <div class="settings-search-bar">
-      <input type="text" placeholder="Search Settings">
+      
     </div>
-    <ul class="settings-option-list">
-      <li class="settings-option active" id="option-your-account" onclick="showPanel('your-account')">Your Account</li>
-      <li class="settings-option" id="option-monetization" onclick="showPanel('monetization')">Monetization</li>
-      <li class="settings-option" id="option-premium" onclick="showPanel('premium')">Premium</li>
-      <li class="settings-option" id="option-creator" onclick="showPanel('creator')">Creator</li>
-      <li class="settings-option" id="option-dissubscription" onclick="showPanel('dissubscription')">Dissubscription</li>
-      <li class="settings-option" id="option-accessibility" onclick="showPanel('accessibility')">Accessibility</li>
-      <li class="settings-option" id="option-privacy-safety" onclick="showPanel('privacy-safety')">Privacy & Safety</li>
-      <li class="settings-option" id="option-notification" onclick="showPanel('notification')">Notification</li>
-      <li class="settings-option" id="option-help-center" onclick="showPanel('help-center')">Help Center</li>
-      <li class="settings-option" id="option-additional-resources" onclick="showPanel('additional-resources')">Additional Resources</li>
-    </ul>
-  </div>
-  <div id="right-sidebar">
-    <div class="settings-panel">
-      <h3>Your Account</h3>
-      <div class="settings-action">Account Information</div>
-      <div class="settings-action">Change Password</div>
-      <div class="settings-action">Download Archives</div>
-      <div class="settings-action">Deactivate Your Account</div>
+    <div id="right-sidebar">
+      <div class="section-box">
+        <h4>News You Might Like</h4>
+        <div style="display: flex; align-items: flex-start; gap: 17px; margin-bottom:15px;">
+          <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=70&h=70&fit=cover" alt="Exhibit Art" style="width:70px;height:70px;border-radius:9px;object-fit:cover;">
+          <div>
+            <b>Vivid Minds Exhibit</b><br>
+            A new immersive art show opens in Berlin, blending digital and traditional media. <br>
+            <span style="color:#9b5de5;font-size:.9em;">11 min ago</span>
+          </div>
+        </div>
+        <div style="display: flex; align-items: flex-start; gap: 17px; margin-bottom:15px;">
+          <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=70&h=70&fit=cover" alt="Sculpture Reveal" style="width:70px;height:70px;border-radius:9px;object-fit:cover;">
+          <div>
+            <b>Skyline Sculpture Unveiled</b><br>
+            Urban artist Nala drops a 20-ft kinetic sculpture in NYC’s Central Park. <br>
+            <span style="color:#9b5de5;font-size:.9em;">Today</span>
+          </div>
+        </div>
+        <div style="display: flex; align-items: flex-start; gap: 17px; margin-bottom:15px;">
+          <img src="https://images.unsplash.com/photo-1424746219973-8fe3bd07d8e3?w=70&h=70&fit=cover" alt="AI Art Panel" style="width:70px;height:70px;border-radius:9px;object-fit:cover;">
+          <div>
+            <b>AI & Art Panel</b><br>
+            Global creators debate: “How much AI is too much in modern art?” <br>
+            <span style="color:#9b5de5;font-size:.9em;">1 hr ago</span>
+          </div>
+        </div>
+        <div style="display: flex; align-items: flex-start; gap: 17px;">
+          <img src="https://images.unsplash.com/photo-1464983953574-0892a716854b?w=70&h=70&fit=cover" alt="Color Trends" style="width:70px;height:70px;border-radius:9px;object-fit:cover;">
+          <div>
+            <b>Color Trends Report</b><br>
+            2025’s top palette: Dreamy violets & fresh whites – trending now! <br>
+            <span style="color:#9b5de5;font-size:.9em;">Yesterday</span>
+          </div>
+        </div>
+      </div>
+      <div class="section-box">
+        <h4>People You Might Follow</h4>
+        <p><b>Dia Chowdhary</b> <span class="badge" style="background:#482673;">Trending</span></p>
+        <p><b>Prachi Aggarwal</b> <span class="badge" style="background:#482673;">Chatpati</span></p>
+        <p><b>Deepali Agarwal</b> <span class="badge" style="background:#482673;">Chat Lead</span></p>
+      </div>
+      <div class="feed-filter-section">
+        <b>Feed Filters:</b>
+        <select>
+          <option>Trending</option>
+          <option>My Interests</option>
+          <option>Nearby Creators</option>
+        </select>
+      </div>
     </div>
   </div>
+  <button class="logout-bottom-btn">Log Out</button>
 </body>
 </html>

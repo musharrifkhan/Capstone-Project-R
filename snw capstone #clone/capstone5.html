@@ -384,10 +384,29 @@ body {
   outline: none;
   background: #4cbfa610;
 }
-@media (max-width: 1150px) {
-  #right-sidebar { display: none; }
-  #community-main-content, .joined-communities, .recommended-communities, .collage-container { max-width: none;}
-  #container {padding-left: 0;}
+ @media (max-width: 600px) {
+  #navbar {
+    display: none !important;
+  }
+  #right-sidebar {
+    display: none !important;
+  }
+  #main-content {
+    width: 100vw !important;
+    max-width: 100vw !important;
+    min-width: 0 !important;
+    padding: 0 !important;
+  }
+  #container {
+    flex-direction: column;
+    padding-top: 0 !important;
+    width: 100vw !important;
+    max-width: 100vw !important;
+    min-width: 0 !important;
+  }
+  body {
+    padding-top: 0 !important;
+  }
 }
 </style>
 
